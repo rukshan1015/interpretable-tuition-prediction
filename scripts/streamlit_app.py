@@ -5,7 +5,7 @@ import os
 
 # Import custom FrequencyEncoder class so joblib can unpickle it
 
-from customencoder import FrequencyEncoder
+from custom_transformers.customencoder import FrequencyEncoder # Get the script from the folder custom_transformers
 
 
 # Load the trained model pipeline
