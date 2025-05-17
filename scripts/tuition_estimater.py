@@ -253,8 +253,5 @@ joblib.dump(model_pipeline, "model_pipeline.joblib")
 #new_prediction = load_pipeline.predict(X_test)
 
 
-# In[ ]:
 
-
-get_ipython().system('jupyter nbconvert --to script tuition_estimater.ipynb')
 
