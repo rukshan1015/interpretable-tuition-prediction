@@ -1,6 +1,6 @@
 # Interpretable Tuition Prediction
 
-This project builds a machine learning model to predict university tuition costs based on features like program, country, living costs, and duration. The pipeline uses XGBoost along with SHAP values and Partial Dependence Plots (PDP) to ensure interpretability of the model's decisions. It is designed with best practices using Scikit-learn pipelines and includes both global and local explanation tools.
+This project builds a machine learning model to predict university tuition costs based on features like country, living costs, and duration. The pipeline uses XGBoost along with SHAP values and Partial Dependence Plots (PDP) to ensure interpretability of the model's decisions. It is designed with best practices using Scikit-learn pipelines and includes both global and local explanation tools.
 
 ## 🧠 Key Features
 - Clean preprocessing pipeline with scaling and frequency encoding
