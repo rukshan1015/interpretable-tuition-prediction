@@ -14,11 +14,11 @@ import joblib  # for saving/loading the model
 #MImporting libries for feature engineering and Model training
 
 from sklearn.preprocessing import StandardScaler
-from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split as split
 from sklearn.metrics import r2_score
+from customencoder import FrequencyEncoder
 import xgboost as xgb
 
 # PDP and SHAP
@@ -96,7 +96,7 @@ sns.heatmap(data_numerical.corr(), annot=True, cmap='coolwarm')
 plt.show()
 
 
-# In[ ]:
+# In[7]:
 
 
 # EDA - Plots (Pairplots to observe relationships)
@@ -104,7 +104,7 @@ plt.show()
 sns.pairplot(data_numerical)
 
 
-# In[ ]:
+# In[8]:
 
 
 ## Determining levels in each categorical column. 
@@ -114,34 +114,10 @@ sns.pairplot(data_numerical)
 print(data[cat].nunique())
 
 
-# In[ ]:
+# In[9]:
 
 
-# Given the high cardinality in categorical data, frequescy ecoding is more suitable for intepretability 
-
-# Creating a custom encoder for frequency encoding 
-class FrequencyEncoder(BaseEstimator, TransformerMixin):
-    def __init__(self):
-        self.freq_maps = {}
-
-    def fit(self, X, y=None):
-        X = pd.DataFrame(X)  # Ensure DataFrame
-        for col in X.columns:
-            freq = X[col].value_counts(normalize=True)
-            self.freq_maps[col] = freq
-        return self
-
-    def transform(self, X):
-        X = pd.DataFrame(X).copy()
-        for col in X.columns:
-            if col in self.freq_maps:
-                X[col] = X[col].map(self.freq_maps[col]).fillna(0)
-            else:
-                X[col] = 0  # or keep original if preferred
-        return X.values  # Return numpy array for sklearn compatibility
-
-    def get_feature_names_out(self, input_features=None):
-        return input_features
+# Given the high cardinality in categorical data, frequescy encoding is more suitable for intepretability 
 
 # Feature engineering 
 ct = ColumnTransformer(transformers=[
@@ -158,7 +134,7 @@ model_pipeline=Pipeline([
 
 
 
-# In[ ]:
+# In[10]:
 
 
 # Splitting the datasetand Training 
@@ -166,7 +142,7 @@ X_train, X_test, y_train, y_test = split(x, y, test_size=0.2, random_state=42)
 
 
 
-# In[ ]:
+# In[11]:
 
 
 # Transforming and Training in pipeline
@@ -174,7 +150,7 @@ X_train, X_test, y_train, y_test = split(x, y, test_size=0.2, random_state=42)
 model_pipeline.fit(X_train,y_train)
 
 
-# In[ ]:
+# In[12]:
 
 
 # Evaluation

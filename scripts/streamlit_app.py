@@ -3,8 +3,13 @@ import joblib
 import pandas as pd
 import os
 
+# Import custom FrequencyEncoder class so joblib can unpickle it
+
+from customencoder import FrequencyEncoder
+
+
 # Load the trained model pipeline
-model_path = "outputs/model_pipeline_v2.joblib"
+model_path = "outputs/model_pipeline.joblib"
 if not os.path.exists(model_path):
     st.error("Model file not found. Please train the model first.")
     st.stop()
