@@ -60,10 +60,10 @@ print(data.nunique)
 
 
 # Column selection and categorization 
-x=data.drop('Tuition_USD',axis=1)
+x=data.drop(['Tuition_USD', 'University','Program'],axis=1)
 y=data['Tuition_USD']
 
-cat=['Country', 'City', 'University', 'Program', 'Level']
+cat=['Country', 'City', 'Level']
 num=['Duration_Years','Living_Cost_Index', 'Rent_USD', 'Visa_Fee_USD','Insurance_USD', 'Exchange_Rate']
 
 
@@ -96,7 +96,7 @@ sns.heatmap(data_numerical.corr(), annot=True, cmap='coolwarm')
 plt.show()
 
 
-# In[7]:
+# In[ ]:
 
 
 # EDA - Plots (Pairplots to observe relationships)
@@ -104,7 +104,7 @@ plt.show()
 sns.pairplot(data_numerical)
 
 
-# In[8]:
+# In[ ]:
 
 
 ## Determining levels in each categorical column. 
@@ -114,7 +114,7 @@ sns.pairplot(data_numerical)
 print(data[cat].nunique())
 
 
-# In[9]:
+# In[ ]:
 
 
 # Given the high cardinality in categorical data, frequescy ecoding is more suitable for intepretability 
@@ -158,7 +158,7 @@ model_pipeline=Pipeline([
 
 
 
-# In[10]:
+# In[ ]:
 
 
 # Splitting the datasetand Training 
@@ -166,7 +166,7 @@ X_train, X_test, y_train, y_test = split(x, y, test_size=0.2, random_state=42)
 
 
 
-# In[11]:
+# In[ ]:
 
 
 # Transforming and Training in pipeline
@@ -174,7 +174,7 @@ X_train, X_test, y_train, y_test = split(x, y, test_size=0.2, random_state=42)
 model_pipeline.fit(X_train,y_train)
 
 
-# In[12]:
+# In[ ]:
 
 
 # Evaluation
@@ -184,7 +184,7 @@ predicted = model_pipeline.predict(X_test)
 r2_score(y_test, predicted)
 
 
-# In[13]:
+# In[ ]:
 
 
 # PDP - If all else is kept constant, how does changing one feature affect the model's prediction?
@@ -205,7 +205,7 @@ PartialDependenceDisplay.from_estimator(
 
 plt.subplots_adjust(hspace=0.8, wspace=0.8)
 plt.show()
-plt.savefig("outputs/PDP_plot.png")
+plt.savefig("PDP_plot.png")
 
 ## IMPORTANT
 
@@ -228,7 +228,7 @@ shap_values.feature_names = feature_names
 
 # Plot global interpretation
 shap.plots.beeswarm(shap_values)
-plt.savefig("outputs/shap_plot.png")
+plt.savefig("shap_plot.png")
 
 # === Summary ===
 # - Feature importance (SHAP): 'cat__Country' has the highest contribution to predictions.
@@ -241,7 +241,7 @@ plt.savefig("outputs/shap_plot.png")
 
 #Saving the model
 
-joblib.dump(model_pipeline, "outputs/model_pipeline.joblib")
+joblib.dump(model_pipeline, "model_pipeline.joblib")
 
 
 # In[ ]:
@@ -253,5 +253,8 @@ joblib.dump(model_pipeline, "outputs/model_pipeline.joblib")
 #new_prediction = load_pipeline.predict(X_test)
 
 
+# In[ ]:
 
+
+get_ipython().system('jupyter nbconvert --to script tuition_estimater.ipynb')
 
