@@ -205,7 +205,7 @@ PartialDependenceDisplay.from_estimator(
 
 plt.subplots_adjust(hspace=0.8, wspace=0.8)
 plt.show()
-plt.savefig("PDP_plot.png")
+plt.savefig("outputs/PDP_plot.png")
 
 ## IMPORTANT
 
@@ -228,7 +228,7 @@ shap_values.feature_names = feature_names
 
 # Plot global interpretation
 shap.plots.beeswarm(shap_values)
-plt.savefig("shap_plot.png")
+plt.savefig("outputs/shap_plot.png")
 
 # === Summary ===
 # - Feature importance (SHAP): 'cat__Country' has the highest contribution to predictions.
@@ -241,7 +241,7 @@ plt.savefig("shap_plot.png")
 
 #Saving the model
 
-joblib.dump(model_pipeline, "model_pipeline.joblib")
+joblib.dump(model_pipeline, "outputs/model_pipeline.joblib")
 
 
 # In[ ]:
