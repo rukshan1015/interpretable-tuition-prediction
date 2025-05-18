@@ -22,7 +22,13 @@ This project builds a machine learning model to predict university tuition costs
 ```bash
 pip install -r requirements.txt
 
-2. python scripts/tuition_estimater.py
+2. Training (Optional)
+```bash
+python scripts/tuition_estimater.py
+
+3. Inferencing
+
+python scripts/tuition_estimater_gradio.py
 
 
 Insights Summary

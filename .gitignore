@@ -1,0 +1,9 @@
+# Ignore Gradio artifacts and temp files
+__pycache__/
+.gradio/
+*.pyc
+
+*.log
+*.DS_Store
+.env
+*.egg-info/
