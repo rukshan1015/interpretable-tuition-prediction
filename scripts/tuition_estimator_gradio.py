@@ -29,15 +29,15 @@ def predict_tuition(country, city, level, duration, living_cost, rent, visa_fee,
 
 # Define Gradio inputs
 inputs = [
-    gr.Dropdown(choices=["USA", "UK", "Canada", "Australia", "Other"], label="Country"),
-    gr.Dropdown(choices=["New York", "London", "Toronto", "Sydney", "Other"], label="City"),
+    gr.Dropdown(choices=["USA", "UK", "Canada", "Australia", "Germany","France","China","Russia","Singapore","Other"], label="Country"),
+    gr.Dropdown(choices=["New York", "Chicago","Boston","Los Angeles","Austin","London","Bristol","Manchester","Glasgow","Leeds","Toronto", "Calgary", "Montreal", "Sydney", "Melbourne", "Canberra","Berlin","Munich","Hamburg","Paris","Lyon","Moscow","Beijing","Shanghai","Singapore","Other"], label="City"),
     gr.Dropdown(choices=["Bachelor", "Master", "PhD"], label="Level"),
-    gr.Slider(minimum=0.5, maximum=6.0, step=0.5, label="Duration (Years)"),
-    gr.Slider(minimum=30.0, maximum=150.0, step=1.0, label="Living Cost Index"),
+    gr.Slider(minimum=1, maximum=6.0, step=1, label="Duration (Years)"),
+    #gr.Slider(minimum=30.0, maximum=200.0, step=1.0, label="Living Cost Index"),
     gr.Number(label="Rent (USD)"),
     gr.Number(label="Visa Fee (USD)"),
     gr.Number(label="Insurance (USD)"),
-    gr.Number(label="Exchange Rate")
+    gr.Number(label="Exchange Rate (USD to Currency)")
 ]
 
 # Launch app
@@ -47,4 +47,4 @@ gr.Interface(
     outputs=gr.Textbox(label="Predicted Tuition"),
     title="University Tuition Cost Estimator",
     description="Enter student information and costs to estimate total tuition."
-).launch()
+).launch().
